@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+python-multipart
+
+# CPU 전용 torch/torchvision (GPU 버전보다 훨씬 가벼움 - easyocr과 문서분류기 특징추출기가 공유)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+
+easyocr
+scikit-learn
+joblib
+pillow
+numpy
