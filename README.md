@@ -72,18 +72,34 @@ immigration-advisor/
 - [x] PRD 작성 및 데이터셋 수집 (66개 파일 - `EasyVisa.csv`만 실제 케이스 단위 라벨 보유)
 - [x] `ml-service`: EasyVisa.csv 기반 비자 승인 확률 분류 모델 학습 (RandomForest,
       hold-out F1 0.81 / ROC-AUC 0.77) 및 FastAPI 서빙 엔드포인트 구현
-- [ ] `ml-service`를 실제 Hugging Face Space에 배포
-- [ ] `core-api` 스캐폴딩 및 `ml-service`와의 엔드투엔드 연동
-- [ ] `ml-service` 국가 추천(콘텐츠 기반 유사도 스코어링) 기능
+- [x] `ml-service`를 실제 Hugging Face Space에 배포 (Docker SDK, private)
+- [x] `ml-service` 국가 추천(DIOC/World Bank/OECD/Kaggle 조인 + 콘텐츠 기반
+      유사도 스코어링) 및 직군 추천(LinkedIn Skill Migration 실데이터 랭킹) 기능
+- [x] `core-api` 스캐폴딩 (프로필 CRUD, 3개 ml-service 엔드포인트 프록시) 및
+      실제 배포된 ml-service와의 엔드투엔드 연동 검증 (로컬 core-api ->
+      Hugging Face의 실제 ml-service까지 curl로 확인)
+- [ ] `core-api`를 Cloudtype에 실제 배포 (DB 애드온 연결 등 대시보드 작업 필요)
 - [ ] `dl-service` (OCR), `llm-service` (RAG 챗봇)
 - [ ] Frontend 연동
 
-## 시작하기 (ml-service)
+## 시작하기
 
+### ml-service
 ```bash
 cd ml-service
 pip install -r requirements.txt
 python -m app.training.preprocess_easyvisa
 python -m app.training.train_visa_classifier
+python -m app.training.country_codes         # 국가명<->ISO3 캐시 생성
+python -m app.training.build_country_profiles
 uvicorn main:app --reload
+```
+
+### core-api
+```bash
+cd core-api
+pip install -r requirements.txt
+cp .env.example .env   # DATABASE_URL, INTERNAL_SERVICE_TOKEN, ML_SERVICE_URL 채우기
+alembic upgrade head
+uvicorn app.main:app --reload
 ```
