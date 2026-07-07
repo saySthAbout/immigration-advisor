@@ -13,6 +13,7 @@
 .env
 */.env
 !*/.env.example
+.internal_service_token.local
 
 # python
 __pycache__/
