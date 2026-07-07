@@ -1,0 +1,80 @@
+# 제품 요구사항 정의서 (PRD)
+
+**프로젝트명:** AI 이민 어드바이저 (AI Immigration Advisor)  
+**버전:** v1.2 (최종본)  
+**작성일:** 2026년 7월 7일  
+
+---
+
+## 1. 프로젝트 개요 및 목적
+* [cite_start]**개요:** ML, DL, LLM 기술을 유기적으로 결합하여 사용자 맞춤형 이민 국가 추천, 비자 승인 확률 예측, 서류 자동화 및 RAG 기반의 AI 이민 상담을 제공하는 **MSA(마이크로서비스 아키텍처) 기반** 종합 이민 어드바이저 플랫폼입니다[cite: 1, 2, 3].
+* [cite_start]**목적:** 독립적인 마이크로서비스 엔진(ML, DL, LLM)을 구축하여 서비스 간 결합도를 낮추고, 클라우드 네이티브 환경(Cloudtype, Hugging Face)에서의 배포 및 확장성을 극대화하여 실제 포트폴리오로서의 기술적 차별성을 확보합니다[cite: 3].
+
+---
+
+## 2. 시스템 아키텍처 및 기술 스택 (MSA 기반)
+
+### 2.1. 인프라 및 기술 스택
+* **Frontend:** Stitch + React (TypeScript)
+* **Backend API Gateway & Core:** FastAPI (Python) @ Cloudtype 배포
+* **Database:** Cloudtype Database (PostgreSQL / MySQL 등)
+* **AI Model Infrastructure:** Hugging Face Spaces
+* **DevOps / CI/CD:** Hugging Face CI/CD (Spaces Auto-deploy via Git)
+
+### 2.2. MSA 서비스 분할 정의
+1. **Core API 서비스 (Cloudtype):** 유저 비즈니스 로직 처리, 데이터베이스 연동, 타 마이크로서비스 API 오케스트레이션 수행.
+2. [cite_start]**ML 추천/예측 엔진 서비스 (Hugging Face):** 국가 추천 및 비자 확률/생활비 예측 알고리즘 구동[cite: 1, 2].
+3. [cite_start]**DL OCR 서비스 (Hugging Face):** 여권 및 서류 데이터 추출 알고리즘 구동[cite: 1, 2].
+4. [cite_start]**LLM RAG 서비스 (Hugging Face):** 이민 정책 데이터 기반 벡터 검색 및 상담 챗봇 엔진 구동[cite: 1, 2].
+
+---
+
+## 3. 상세 기능 명세 (Detailed Functional Specifications)
+
+### 3.1. [화면 1] 온보딩 및 유저 프로필 입력 대시보드
+* **기능 1: OCR 기반 서류 자동 입력 및 데이터 매핑 (DL 연동)**
+  * [cite_start]**동작:** 사용자가 여권, 졸업증명서, 경력증명서 등을 업로드합니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** React에서 파일 업로드 이벤트를 감지해 Cloudtype Core API로 전달하면, Hugging Face DL 마이크로서비스가 OCR을 수행합니다[cite: 1, 2]. [cite_start]분석된 성명, 생년월일, 경력 등의 텍스트 데이터가 React Form의 State로 자동 매핑됩니다[cite: 1, 2].
+* **기능 2: 정량 데이터 입력 폼 및 실시간 유효성 검증**
+  * [cite_start]**동작:** 나이, 최종 학력, 경력, 어학 점수, 희망 국가를 입력받습니다[cite: 2].
+  * **상세 스펙:** React Hook Form을 활용하여 필수 값 누락 및 형식 에러를 UI에 즉각 표시합니다.
+
+### 3.2. [화면 2] AI 매칭 및 종합 분석 리포트 화면
+* **기능 3: ML 기반 맞춤형 이민 국가 Top 3 추천 (ML 연동)**
+  * [cite_start]**동작:** 유저 프로필에 맞는 최적의 국가와 취업 가능 직군을 추천합니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** Hugging Face ML 마이크로서비스(Random Forest, XGBoost, LightGBM, CatBoost 등)의 분석 결과를 카드 형태로 렌더링합니다[cite: 1, 2].
+* **기능 4: 비자 승인 확률 예측 및 부족 조건 피드백 (ML + LLM 연동)**
+  * [cite_start]**동작:** 특정 비자 유형에 대한 합격 가능성을 % 수치로 시각화하고 부족 조건 분석을 제공합니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** ML 모델이 산출한 점수를 차트로 시각화하며, 승인 확률이 낮을 경우 LLM 마이크로서비스가 생성한 부족 조건 및 개선 방향 텍스트 가이드를 동적으로 노출합니다[cite: 1, 2].
+* **기능 5: 국가별 생활비 및 취업 가능 직군 예측 (ML 연동)**
+  * [cite_start]**동작:** 해당 국가 이주시 예상되는 생활비와 취업 가능한 직무 리스트를 보여줍니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** 카테고별 생활비 차트 및 직군 추천 스크롤 테이블을 구현합니다[cite: 1, 2].
+
+### 3.3. [화면 3] RAG 상담 챗봇 및 가이드 컴포넌트
+* **기능 6: 스트리밍(Streaming) 방식의 RAG 이민 상담 챗봇 (LLM 연동)**
+  * [cite_start]**동작:** 사용자가 이민 정책이나 절차에 대해 질문하면 공식 자료 기반으로 실시간 답변합니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** FastAPI의 `StreamingResponse`를 통해 Hugging Face LLM 서비스가 토큰을 생성할 때마다 React 화면에 타이핑 효과로 출력하며, 참고한 이민성 공식 문서 출처 링크를 하단에 표기합니다[cite: 1, 2].
+* **기능 7: Dynamic 이민 준비 체크리스트 자동 생성 (LLM 연동)**
+  * [cite_start]**동작:** 타겟 국가 및 비자가 결정되면 준비해야 할 서류와 타임라인 체크리스트가 동적으로 생성됩니다[cite: 1, 2].
+  * [cite_start]**상세 스펙:** LLM이 반환한 JSON 구조의 태스크 데이터를 React 상태로 관리하며, 체크 여부에 따라 진행률 바가 실시간 업데이트되고 Cloudtype DB에 즉시 동기화됩니다[cite: 1, 2].
+
+---
+
+## 4. 데브옵스 및 배포 전략 (CI/CD)
+* **Hugging Face CI/CD 파이프라인:** Git Repository와 Hugging Face Spaces를 연동하여, `main` 브랜치에 코드가 Push되면 내장 CI/CD가 빌드 및 도커 배포를 자동으로 수행합니다.
+* **Cloudtype 배포 파이프라인:** Core API와 Cloudtype DB를 웹훅 기반 자동 빌드로 관리합니다.
+
+---
+
+## 5. 비기능 요구사항 (Non-Functional Requirements)
+* **결합도 최소화 (Lo้osely Coupled):** 마이크로서비스 엔진 중 하나가 다운되더라도 타 서비스는 독립적으로 작동해야 합니다.
+* **비동기 성능 극대화:** FastAPI의 `async/await` 구문을 활용하여 마이크로서비스 간 REST API 통신 시 병목 현상을 방지합니다.
+* **보안:** 외부에는 프론트엔드와 연결되는 Core API만 노출하며, Hugging Face AI 엔진들은 Bearer Token 인증 기반 내부 통신만 허용합니다.
+
+---
+
+## 6. MSA 데이터 및 시스템 흐름도 (Data Flow)
+
+* **Step 1 (서류 업로드):** [React Frontend] -> 파일 업로드 -> [FastAPI Core (Cloudtype)] -> [DL OCR Service (Hugging Face)] (텍스트 파싱 및 반환)
+* **Step 2 (진단 요청):** [React Frontend] -> 진단 데이터 송신 -> [FastAPI Core] -> [ML Engine] (확률/생활비 계산) & [LLM Engine] (조건 피드백 생성)
+* **Step 3 (실시간 상담):** [React Frontend] -> 챗봇 질문 -> [FastAPI Core] -> [LLM RAG Service] (공식문서 기반 답변 스트리밍 반환)

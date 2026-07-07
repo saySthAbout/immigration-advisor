@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Immigration AI - Country Comparison</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#abc7ff",
+                        "on-surface-variant": "#43474f",
+                        "on-background": "#0b1c30",
+                        "success-green": "#10B981",
+                        "surface-variant": "#d3e4fe",
+                        "surface-container-high": "#dce9ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "outline": "#747781",
+                        "on-tertiary-fixed": "#001d33",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-surface": "#0b1c30",
+                        "error-red": "#EF4444",
+                        "inverse-primary": "#abc7ff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#004491",
+                        "warning-amber": "#F59E0B",
+                        "on-primary-fixed-variant": "#24467c",
+                        "on-secondary-fixed": "#001a40",
+                        "outline-variant": "#c4c6d1",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-fixed": "#cfe5ff",
+                        "on-error-container": "#93000a",
+                        "ai-accent": "#EEF2FF",
+                        "on-primary-fixed": "#001b3f",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#d7e2ff",
+                        "tertiary-fixed-dim": "#98cbff",
+                        "surface-dim": "#cbdbf5",
+                        "on-secondary-container": "#003370",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "surface-tint": "#3e5e95",
+                        "background": "#f8f9ff",
+                        "primary": "#00193c",
+                        "primary-container": "#002d62",
+                        "surface-container": "#e5eeff",
+                        "tertiary": "#001b31",
+                        "on-tertiary-container": "#009cf5",
+                        "on-primary-container": "#7796d1",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-bg": "#F8FAFC",
+                        "tertiary-container": "#003151",
+                        "secondary-container": "#659dfe",
+                        "secondary": "#115cb9",
+                        "on-tertiary-fixed-variant": "#004a77",
+                        "secondary-fixed-dim": "#acc7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "12px",
+                        "stack-lg": "48px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "stack-md": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .radar-grid {
+            stroke: #c4c6d1;
+            stroke-dasharray: 4;
+        }
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-surface-bg text-on-surface">
+<!-- SideNavBar Anchor -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-tertiary-container shadow-md z-50">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">language</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed-dim leading-none">Nexus AI</h1>
+<p class="text-xs font-label-sm text-on-surface-variant uppercase tracking-widest mt-1">Global Mobility</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-primary dark:text-inverse-primary border-r-4 border-secondary font-bold bg-secondary-container/20 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span class="font-label-md text-label-md">Analysis Report</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">smart_toy</span>
+<span class="font-label-md text-label-md">AI Chatbot</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">account_circle</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<div class="p-4 mx-4 mb-6 bg-primary text-white rounded-xl shadow-lg">
+<p class="text-sm font-medium mb-2">Upgrade to Pro</p>
+<p class="text-xs opacity-80 mb-4">Access deep legal insights &amp; OCR processing.</p>
+<button class="w-full py-2 bg-secondary-container text-primary font-bold rounded-lg text-xs hover:bg-white transition-colors">Go Premium</button>
+</div>
+<div class="px-4 py-6 border-t border-outline-variant/30 space-y-1">
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">contact_support</span>
+<span class="text-sm">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Anchor -->
+<header class="sticky top-0 z-40 h-16 w-full flex justify-between items-center px-margin-desktop backdrop-blur-xl bg-surface-container/80 dark:bg-primary-container/80 border-b border-outline-variant shadow-sm">
+<div class="flex items-center gap-4">
+<span class="md:hidden material-symbols-outlined text-primary cursor-pointer">menu</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-surface-bright">Comparison Analysis</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-6">
+<span class="font-label-md text-secondary dark:text-secondary-fixed font-bold border-b-2 border-secondary pb-1">Country Match</span>
+<span class="font-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors cursor-pointer">Pathways</span>
+<span class="font-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors cursor-pointer">Documents</span>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-primary-container hover:bg-surface-container-highest p-2 rounded-full cursor-pointer transition-colors">notifications</span>
+<span class="material-symbols-outlined text-on-primary-container hover:bg-surface-container-highest p-2 rounded-full cursor-pointer transition-colors">help_outline</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young tech professional with a friendly expression, soft natural lighting, and a neutral background. The subject is wearing business casual attire, reflecting a modern, reliable user avatar for a high-end immigration platform. Professional photography style, sharp focus, vibrant colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKunyn5S3HAQ4svGAwc9B6zAV-xyuUPjZf8onsqK0om_XIj_HIxK5R058fJbIhRaucS1j0AWsgQZ002H5D1-K1gC-MJr_bQFtCejWuVHOCzm1_LtGhelTMc2oHsAbQGdqrWxd6XSLBxgClGwHUG8gdJvXkrYIkYyNcJW5AtRzHX7MmAFRJFLCoz5lx2XnOqbQ0wD9dlescCDDZTGeXpumvsye5BKg44VwlywsLnqupQBahVTJAEXYbxVdWGhQjk4eZdP3GyP_JiFH7"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-stack-md md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Intro Section with animated shader bg placeholder -->
+<section class="relative overflow-hidden rounded-3xl bg-primary text-white p-8 md:p-12 mb-stack-lg shadow-2xl">
+
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="max-w-2xl">
+<span class="inline-flex items-center px-3 py-1 bg-secondary-container/20 text-secondary-fixed rounded-full text-xs font-label-md mb-4 border border-secondary-fixed/30">
+<span class="material-symbols-outlined text-sm mr-2" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> AI-Driven Recommendations
+                        </span>
+<h1 class="font-display-lg text-display-lg font-bold leading-tight mb-4">Your Global Opportunity <br/>Landscape.</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-xl">
+                            Our proprietary ML models have analyzed 42 variables of your profile against 180+ visa categories. Germany, Canada, and Australia emerge as your strongest matches.
+                        </p>
+</div>
+<div class="flex flex-col items-center p-6 glass-panel rounded-2xl border border-white/10">
+<div class="text-4xl font-bold mb-1">98.4%</div>
+<div class="text-xs uppercase tracking-widest text-primary-fixed-dim">Analysis Accuracy</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid - Radar Chart & Core Comparison -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Radar Chart Card (User Fit) -->
+<div class="lg:col-span-5 bg-white rounded-3xl p-8 border border-outline-variant shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Compatibility Radar</h3>
+<p class="font-body-md text-on-surface-variant">Profile mapping across key pillars</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-3xl">hub</span>
+</div>
+<div class="flex-1 flex items-center justify-center py-6">
+<!-- Custom SVG Radar Chart -->
+<svg class="w-full max-w-[320px] h-auto overflow-visible" viewbox="0 0 200 200">
+<!-- Background Circles -->
+<circle class="radar-grid" cx="100" cy="100" fill="none" r="80"></circle>
+<circle class="radar-grid" cx="100" cy="100" fill="none" r="60"></circle>
+<circle class="radar-grid" cx="100" cy="100" fill="none" r="40"></circle>
+<circle class="radar-grid" cx="100" cy="100" fill="none" r="20"></circle>
+<!-- Axis Lines -->
+<line stroke="#c4c6d1" stroke-width="1" x1="100" x2="100" y1="20" y2="180"></line>
+<line stroke="#c4c6d1" stroke-width="1" x1="20" x2="180" y1="100" y2="100"></line>
+<!-- Axis Labels -->
+<text class="fill-on-surface-variant font-label-sm text-[8px] uppercase" text-anchor="middle" x="100" y="10">Income Growth</text>
+<text class="fill-on-surface-variant font-label-sm text-[8px] uppercase" text-anchor="start" x="185" y="103">Job Market</text>
+<text class="fill-on-surface-variant font-label-sm text-[8px] uppercase" text-anchor="middle" x="100" y="195">Stability</text>
+<text class="fill-on-surface-variant font-label-sm text-[8px] uppercase" text-anchor="end" x="15" y="103">Visa Ease</text>
+<!-- Radar Data Polygon - Canada -->
+<polygon fill="rgba(17, 92, 185, 0.2)" points="100,30 170,100 100,160 40,100" stroke="#115cb9" stroke-width="2"></polygon>
+<!-- Radar Data Polygon - Germany -->
+<polygon fill="rgba(0, 25, 60, 0.15)" points="100,50 160,100 100,170 50,100" stroke="#00193c" stroke-dasharray="2" stroke-width="2"></polygon>
+</svg>
+</div>
+<div class="mt-8 grid grid-cols-2 gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary rounded-full"></div>
+<span class="text-xs font-label-sm text-on-surface">Canada (Optimized)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 border border-primary border-dashed rounded-full bg-primary/20"></div>
+<span class="text-xs font-label-sm text-on-surface">Germany (Technical)</span>
+</div>
+</div>
+</div>
+<!-- Comparison Table Card -->
+<div class="lg:col-span-7 bg-white rounded-3xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
+<div class="p-8 border-b border-outline-variant bg-surface-container-low/30">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Top Tier Recommendations</h3>
+<p class="font-body-md text-on-surface-variant">Side-by-side metric comparison</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/10">
+<th class="p-6 font-label-md text-on-surface-variant uppercase tracking-wider text-xs border-r border-outline-variant/30">Metric</th>
+<th class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-6 bg-red-600 rounded-sm shadow-sm flex items-center justify-center text-[10px] text-white font-bold">CAN</div>
+<span class="font-bold text-primary">Canada</span>
+</div>
+</th>
+<th class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-6 bg-blue-800 rounded-sm shadow-sm flex items-center justify-center text-[10px] text-white font-bold">AUS</div>
+<span class="font-bold text-primary">Australia</span>
+</div>
+</th>
+<th class="p-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-6 bg-black rounded-sm shadow-sm flex flex-col items-center justify-center">
+<div class="w-full h-1/3 bg-black"></div>
+<div class="w-full h-1/3 bg-red-600"></div>
+<div class="w-full h-1/3 bg-yellow-400"></div>
+</div>
+<span class="font-bold text-primary">Germany</span>
+</div>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-6 font-medium text-on-surface-variant border-r border-outline-variant/30">Visa Speed</td>
+<td class="p-6 text-success-green font-bold">4-6 Months</td>
+<td class="p-6 text-on-surface">9-12 Months</td>
+<td class="p-6 text-on-surface">3-5 Months</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-6 font-medium text-on-surface-variant border-r border-outline-variant/30">Cost of Living</td>
+<td class="p-6 text-on-surface">$$$ (High)</td>
+<td class="p-6 text-on-surface">$$$$ (Extreme)</td>
+<td class="p-6 text-secondary font-bold">$$ (Moderate)</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-6 font-medium text-on-surface-variant border-r border-outline-variant/30">Job Market</td>
+<td class="p-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant text-sm">star</span>
+</div>
+</td>
+<td class="p-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-outline-variant text-sm">star</span>
+<span class="material-symbols-outlined text-outline-variant text-sm">star</span>
+</div>
+</td>
+<td class="p-6">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-6 font-medium text-on-surface-variant border-r border-outline-variant/30">Quality of Life</td>
+<td class="p-6 text-on-surface">88/100</td>
+<td class="p-6 text-on-surface">92/100</td>
+<td class="p-6 text-on-surface">85/100</td>
+</tr>
+<tr class="bg-surface-container-low/10">
+<td class="p-6 border-r border-outline-variant/30"></td>
+<td class="p-6">
+<button class="w-full py-2 bg-primary text-white font-bold rounded-lg text-xs active:scale-95 transition-transform">Select for Deep Dive</button>
+</td>
+<td class="p-6">
+<button class="w-full py-2 border border-primary text-primary font-bold rounded-lg text-xs active:scale-95 transition-transform">Select for Deep Dive</button>
+</td>
+<td class="p-6">
+<button class="w-full py-2 border border-primary text-primary font-bold rounded-lg text-xs active:scale-95 transition-transform">Select for Deep Dive</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Detailed Breakdown Cards -->
+<section class="mt-stack-lg">
+<div class="flex items-center gap-4 mb-stack-md">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Strategic Insights</h2>
+<div class="h-px flex-1 bg-outline-variant"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Canada Detail -->
+<div class="group bg-white rounded-3xl p-6 border border-outline-variant shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-48 rounded-2xl mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A cinematic, high-quality photograph of the Toronto skyline at dusk with the CN Tower prominently featured. The lighting is a blend of deep blues and vibrant city lights, reflecting a prosperous and welcoming urban environment. The aesthetic is clean, professional, and slightly futuristic, consistent with a high-end immigration platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjcTUi0eBV43ln8xReFWEfzxj32BIOxz8MsZqB74ORylpzPvcQGzx0s3rbj_66EIFoqaTRtrwXM_lpajF11D55ONVDiQ9aGW03jEeJp85y3QHmnOBxxkU_XK2cXX7zQ_wTy925sLm7-RMzVgRj8xYm_VdP5qfdS0_YeqnKW8PtnF1rbTDwnexj9gcc_bm3u19YW5a9H7tr4gmy-VyWFZCgFJsAxnj1kbL_aX_oyEgDeOAwX_U537sCtwxp6PkdzWzd_pSk-Wvx9qkV"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-primary flex items-center gap-2">
+<span class="w-2 h-2 bg-success-green rounded-full"></span> 84% MATCH
+                            </div>
+</div>
+<h4 class="font-headline-md text-headline-md font-bold text-primary mb-2">Canada</h4>
+<p class="text-on-surface-variant font-body-md text-sm mb-6 leading-relaxed">
+                            Best for Skilled Workers seeking Express Entry. Strong permanent residency pathways and high acceptance rates for STEM backgrounds.
+                        </p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<span class="font-label-sm text-xs text-on-surface-variant">2.4k Monthly Visas</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Australia Detail -->
+<div class="group bg-white rounded-3xl p-6 border border-outline-variant shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-48 rounded-2xl mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A breathtaking view of the Sydney Opera House and the harbor during golden hour. The sky is filled with warm orange and pink hues, contrasting with the crisp white sails of the building. The photography is professional and airy, emphasizing quality of life and scenic beauty. Modern light-mode aesthetic with a sense of stability and luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnD3woazJ5M7BP3SgVVgmoSQFaKtR4QPU_d3jZVo7JBLJh_vrFH-abdUUyh2xvi2VgrOcAUTnEJWDRKaMsQCLrOa3OHSqxRZN5n7ISCiLpcqlIRinjhiQdnU1YWf1Lw-JaCeoc19a1al9fDvsEIIsFN9q-nXoLwe8pCR_js3BRknWL0sqSE_WmQrZo5Vfu0TWRzkHb2gCsyRKxkPBoymosi9l1h66B7HTijt2l0Bpy87W89ZWtsls-UKgUet2IlB3Gip_Qal7xAVOt"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-primary flex items-center gap-2">
+<span class="w-2 h-2 bg-warning-amber rounded-full"></span> 76% MATCH
+                            </div>
+</div>
+<h4 class="font-headline-md text-headline-md font-bold text-primary mb-2">Australia</h4>
+<p class="text-on-surface-variant font-body-md text-sm mb-6 leading-relaxed">
+                            Premier choice for lifestyle and healthcare. The Subclass 189/190 visas favor professional experience in regional growth centers.
+                        </p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<span class="font-label-sm text-xs text-on-surface-variant">1.1k Monthly Visas</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Germany Detail -->
+<div class="group bg-white rounded-3xl p-6 border border-outline-variant shadow-sm hover:shadow-xl transition-all duration-300">
+<div class="h-48 rounded-2xl mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sleek, modern aerial view of Berlin's government district and the Spree river. The architecture is a mix of historical and cutting-edge glass-and-steel buildings, representing efficiency and technical prowess. High-key lighting, clean sharp lines, and a professional blue-tinted atmosphere that aligns with the Nexus AI brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQo9QFsGKztEj3_etSoRKZipqWVVBHjYO8FOxEDRJnJe3YfimWb8PocthUjtJXSuTvKCj3KxbRr9o6OJJlxTNkijDaBv-Ei6rfeTPku5tVNydPB5aUioOJbAgJZhu1VTCfbjRUOo6fYSz-Ub1-DvXIw__LFbEEckhWIOahJDFfODYXZ0jyBiXxnpSPOMHubV7uUmPI__vrwSCyjHcJEa9xUVucwvLdPFnueu6VUNUnqhIUHfLYRL2_GDpR8mM7CS4lfvYH0x33Jim0"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-primary flex items-center gap-2">
+<span class="w-2 h-2 bg-success-green rounded-full"></span> 91% MATCH
+                            </div>
+</div>
+<h4 class="font-headline-md text-headline-md font-bold text-primary mb-2">Germany</h4>
+<p class="text-on-surface-variant font-body-md text-sm mb-6 leading-relaxed">
+                            Leading hub for engineering and AI talent. Opportunity Card (Chancenkarte) makes job searching locally more accessible than ever.
+                        </p>
+<div class="flex items-center justify-between pt-6 border-t border-outline-variant">
+<span class="font-label-sm text-xs text-on-surface-variant">3.8k Monthly Visas</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Anchor -->
+<footer class="mt-auto w-full py-base border-t border-outline-variant bg-surface-container-lowest dark:bg-on-primary-fixed">
+<div class="flex flex-wrap justify-between items-center px-margin-desktop py-stack-sm w-full">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md font-bold text-primary dark:text-primary-fixed">Nexus Immigration AI</span>
+<span class="text-on-surface-variant opacity-30">|</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant">© 2024 Nexus Immigration AI. Precision Immigration Governance.</p>
+</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:underline" href="#">Legal Terms</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:underline" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:underline" href="#">Official Sources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:underline" href="#">API Documentation</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- AI Chatbot Floating Trigger (Contextual) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="group flex items-center gap-3 bg-primary text-white p-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300" id="chatbotTrigger">
+<div class="relative">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="absolute -top-1 -right-1 w-3 h-3 bg-secondary rounded-full border-2 border-primary animate-pulse"></span>
+</div>
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 whitespace-nowrap font-bold text-sm">Ask Nexus AI</span>
+</button>
+</div>
+<!-- Micro-interaction script -->
+<script>
+        // Smooth hover effects for the comparison table
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.classList.add('bg-surface-container/20');
+            });
+            row.addEventListener('mouseleave', () => {
+                row.classList.remove('bg-surface-container/20');
+            });
+        });
+
+        // Chatbot Trigger simple animation log
+        document.getElementById('chatbotTrigger').addEventListener('click', () => {
+            console.log('Nexus AI Chatbot instance requested...');
+        });
+    </script>
+</body></html>

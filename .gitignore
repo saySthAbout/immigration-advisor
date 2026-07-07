@@ -1,0 +1,29 @@
+# nested per-service git repos (each pushes to its own HF Space remote independently)
+/ml-service/.git/
+/dl-service/.git/
+/llm-service/.git/
+
+# raw/processed datasets - too large/messy for git, scripts reproduce them
+/dataset/
+/*/data/raw/
+/*/data/processed/
+/*/models/
+
+# env/secrets
+.env
+*/.env
+!*/.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# node
+node_modules/
+dist/
+
+# os
+.DS_Store
+Thumbs.db
