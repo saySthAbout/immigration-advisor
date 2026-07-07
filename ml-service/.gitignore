@@ -1,0 +1,14 @@
+# 이 저장소는 HF Space 배포용 독립 git repo라 상위 모노레포 .gitignore와 다르게
+# 서빙에 실제로 필요한 모델/전처리 산출물은 커밋 대상에 포함시킨다.
+
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# 학습 중간 산출물(서빙에 불필요) - 원본 raw 데이터도 용량 문제로 제외하되,
+# 서빙 시점에 실제로 읽는 job_market 원본과 country_profiles.csv는 남긴다.
+data/processed/easyvisa_clean.csv
+data/raw/cost_of_living/
+uvicorn_test.log
