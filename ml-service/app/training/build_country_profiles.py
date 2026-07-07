@@ -15,6 +15,10 @@ country_status(비자 승인) 같은 개별 라벨이 없어서 지도학습이 
      취득 난이도의 근사 지표
    - Inflows of foreign population.xlsx -> 최근 연도 순유입 규모(천 명) - 최근
      이민 활발도 신호
+4. Kaggle "Cost of Living Index by Country 2024"(myrios) - Numbeo 기반 국가별
+   생활비 지수. 이건 학습 대상이 아니라 그대로 조인만 한다 - 지수 자체가 이미
+   최종 산출값이라(다른 피처로부터 "예측"할 대상이 아님) 회귀 모델을 억지로
+   만드는 대신 body_guide의 diet_coach 영양정보 조회처럼 조회 테이블로 쓴다.
 
 DIOC가 다루는 35개 OECD 목적지 국가만 최종 국가 유니버스로 쓴다(실질적으로 이민
 목적지로 추천할 만한 국가 범위와 일치).
@@ -46,6 +50,7 @@ NAME_ALIASES = {
     "korea": "korea, rep.",
     "south korea": "korea, rep.",
     "slovak republic": "slovak republic",
+    "slovakia": "slovak republic",
 }
 
 
@@ -146,6 +151,14 @@ def build() -> pd.DataFrame:
 
     inflows = _parse_oecd_wide_table(DATASET_DIR / "Inflows of foreign population.xlsx", name_to_iso3)
     profiles["annual_inflow_thousands"] = inflows["value"]
+
+    # 4. Kaggle 생활비 지수 - 조회 테이블로만 사용(회귀 대상 아님)
+    col_path = Path(__file__).resolve().parents[2] / "data" / "raw" / "cost_of_living" / "Cost_of_Living_Index_by_Country_2024.csv"
+    cost_of_living = pd.read_csv(col_path)
+    cost_of_living["iso3"] = cost_of_living["Country"].apply(lambda n: name_to_iso3.get(_normalize_name(n)))
+    cost_of_living = cost_of_living.dropna(subset=["iso3"]).set_index("iso3")
+    profiles["cost_of_living_index"] = cost_of_living["Cost of Living Index"]
+    profiles["local_purchasing_power_index"] = cost_of_living["Local Purchasing Power Index"]
 
     profiles = profiles.reset_index().rename(columns={"index": "iso3"})
     PROCESSED_PATH.parent.mkdir(parents=True, exist_ok=True)

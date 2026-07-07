@@ -90,6 +90,8 @@ def recommend_countries(origin_continent: str, weights: dict | None = None, top_
                 "naturalization_rate_pct": row["naturalization_rate_pct"],
                 "annual_inflow_thousands": row["annual_inflow_thousands"],
                 "income_group": row["income_group"],
+                "cost_of_living_index": row["cost_of_living_index"],
+                "local_purchasing_power_index": row["local_purchasing_power_index"],
             }
         )
 
